@@ -51,8 +51,18 @@ function percentualEleitores() {
 
 // Exercício 03 - Quatro números inteiros e realize algumas operações //////////////
 function quatroNumeros(){
-    let numeros = [];
-    let a = 0;
+    //let numeros = [];
+    let numero1 = parseFloat(scan("Número 1: "));
+    let numero2 = parseFloat(scan("Número 2: "));
+    let numero3 = parseFloat(scan("Número 3: "));
+    let numero4 = parseFloat(scan("Número 4: "));
+
+    numero4 = numero1 + numero2 + numero3;
+    numero1 += 25;
+    numero2 = numero2 * 3;
+    numero3 = numero3 * 0.12;
+
+    /*let a = 0;
     for(let i = 0; i < 4; i++){
         let n = parseInt(scan(`Digite o ${i+1}º número: `));
         numeros.push(n);
@@ -65,6 +75,8 @@ function quatroNumeros(){
     numeros[3] = a - numeros[3];
 
     console.log(`\nMais 25: ${numeros[0]}\n Triplo: ${numeros[1]}\n 12%: ${numeros[2]}\n Soma dos 3 primeiros: ${numeros[3]}`);
+    limparTela();*/
+    console.log(`\nMais 25: ${numero1}\n Triplo: ${numero2}\n 12%: ${numero3}\n Soma dos 3 primeiros: ${numero4}`);
     limparTela();
 }
 
