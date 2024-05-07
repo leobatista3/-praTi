@@ -1,4 +1,4 @@
-# Lista de Atividades 01 +praTI
+# Lista de Atividades +praTI
 
 * Procedimentos para execução dos exercícios 
 
