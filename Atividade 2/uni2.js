@@ -420,7 +420,7 @@ function pesoIdeal(altura, sexo){
     }
 
     const pesoCalculado = calcularPeso(altura, sexo);
-    console.log("Peso ideal: " + pesoCalculado);
+    console.log("Peso ideal: " + pesoCalculado.toFixed(2));
     limparTela();
 }
 
@@ -473,6 +473,7 @@ function matrizIdentidade(){
         }
         console.log(linha);
     }
+    limparTela();
 }
 
 // EXERCÍCIO 24: matriz M[1..6,1..8], criar um vetor C
@@ -484,7 +485,8 @@ function matrizIdentidade(){
     for (let i = 0; i < linhas; i++) {
         m[i] = [];
         for (let j = 0; j < colunas; j++) {
-            m[i][j] = (i + 1) * (j + 1);
+            //m[i][j] = (i + 1) * (j + 1);
+            m[i][j] = Math.floor(Math.random() * 101) - 50;
         }
     }
 
@@ -497,10 +499,13 @@ function matrizIdentidade(){
                 //c.push(m[i][j]);
             }
         }
-        //c.push(negativos);
+        c.push(negativos);
     }
-    c = negativos;
-    console.log(`Negativos: ${c}`);
+    //c = negativos;
+    console.log("Matriz M:");
+    console.log(m);
+    console.log(`Quantidade de negativos em cada linha: ${c}`);
+    limparTela();
 }
 
 // EXERCÍCIO 25: MATRIZ 15X20 E MOSTRE SOMA DE CADA COLUNA SEPRADAMENTE
@@ -525,6 +530,7 @@ function matrizIdentidade(){
         c.push(soma);
     }
     console.log(c);
+    limparTela();
 }
 
 // EXERCÍCIO 26: DUAS MATRIZES A[1..3, 1..5] E B[1..3, 1..5]
@@ -819,11 +825,332 @@ function matriz12x13(){
     }
     limparTela();
 }
+
+// EXERCÍCIO 33: MATRIZ 3X3 E MULTIPLICAR DIAGONAL SECUNDÁRIA
+function diagonalSecundaria(){
+    const linhas = 3; const colunas = 3;
+    let matriz = [];
+    for(let i = 0; i < linhas; i++){
+        matriz[i] = [];
+        for(let j = 0; j < colunas; j++){
+            matriz[i][j] = (i + 1) * (j + 1);
+        }
+    }
+    console.log(`\nMatriz 3x3: \n`);
+    for(let i = 0; i < matriz.length; i++){
+        let aux = "";
+        for(let j = 0; j < matriz.length; j++){
+            aux += matriz[i][j] + " ";
+        }
+        console.log(aux);
+    }
+    let somaDiagonal = 0;
+    for(let i = 0; i < linhas; i++){
+        for(let j = 0; j < colunas; j++){
+            if(i == j){
+                somaDiagonal += matriz[i][j];
+            }
+        }
+    }
+    console.log(`\nSoma da diagonal secundária: ${somaDiagonal}`);
+    limparTela();
+}
+
+// EXERCÍCIO 34: MATRIZ 50X50 DE NUMEROS REAIS
+function trinta4(){
+    const linhas = 5; const colunas = 5; // usei 5 pro resultado ser melhor visto na exibição do programa
+    let matriz = [];
+    for(let i = 0; i < linhas; i++){
+        matriz[i] = [];
+        for(let j = 0; j < colunas; j++){
+            matriz[i][j] = Math.random() * 100;
+        }
+    }
+    console.log(`\nMatriz 50x50: \n`);
+    for(let i = 0; i < matriz.length; i++){
+        let aux = "";
+        for(let j = 0; j < matriz.length; j++){
+            aux += matriz[i][j].toFixed(2) + " ";
+        }
+        console.log(aux);
+    }
+    
+    for(let i = 0; i < linhas; i++) {
+        const elementoDiagonal = matriz[i][i]; 
+        for(let j = 0; j < colunas; j++) {
+            matriz[i][j] *= elementoDiagonal;
+        }
+    }
+
+    console.log(`\nMatriz 50x50 Após Multiplicações: \n`);
+    for(let i = 0; i < matriz.length; i++) {
+        let aux = "";
+        for(let j = 0; j < matriz[i].length; j++) {
+            aux += matriz[i][j].toFixed(2) + " ";
+        }
+        console.log(aux);
+    }
+
+    limparTela();
+}
+
+// EXERCÍCIO 35: 2 vetores de 5 posicoes
+function trintavalores(){
+    aux = 0;
+    par = [];
+    impar = [];
+    for(let i = 0; i < 30; i++){
+        valores = parseInt(scan("Valor: "));
+        if(valores % 2 === 0){
+            if(par.length >= 5){
+                console.log(`Vetor par está cheio: ${par}`);
+            }else{
+                par.push(valores);
+            }        
+        }else{
+            if(impar.length >= 5){
+                console.log(`Vetor ímpar está cheio: ${impar}`);
+            }else{
+                impar.push(valores);
+            }
+        }
+    }
+    console.log(`-- Resultado final --\nPar: ${par}\nìmpar: ${impar}`);
+    limparTela();
+}
+
+// EXERCÍCIO 36: VETOR DE 13 ELEMENTOS
+function trinta6() {
+    const max = 2; // exercício pede 13
+    v = [];
+
+    console.log("-- GABARITO --")
+    for(let i = 0; i < max; i++){
+        v.push(parseInt(scan(`-- Elemento${i+1}: `)));
+    }
+
+    const apostadores = 2; // aqui o exercício pediu 100. coloquei 2 pra teste
+    cartao = 0; 
+    respostas = [];
+    acertos = 0;
+
+    for(let i = 0; i < apostadores; i++){
+        respostas = [];
+        acertos = 0;
+        console.log(`Apostador ${i + 1} \n`);
+        cartao = parseInt(scan(`Número cartão: `));
+        
+        for(let j = 0; j < max; j++){
+            respostas.push(parseInt(scan(`Rsposta ${j+1}: `)));
+        }
+
+        for(let k = 0; k < max; k++){
+            for(let l = 0; l < max; l++){
+                if(respostas[k] === v[l]){
+                    acertos++;
+                    break;
+                }
+            }
+        }
+
+        console.log(`Apostador ${i+1} - Acertos: ${acertos}`);
+        
+        if(acertos === max){
+            console.log("PARABÉNS, TU GANHOU!!!")
+        }   
+    }
+
+    limparTela();
+}
+
+// EXERCÍCIO 37: VETOR G
+function vetorG(){
+    const max = 2; // exercício pede 20
+    g = [];
+    r = [];
+
+    for(let i = 0; i < max; i++){
+        g.push(scan(`-- Caractere${i+1}: `));
+    }
+
+    acertos = 0;
+    const m = 5; //exercício pede 50
+    for(let i = 0; i < m; i++){
+        acertos = 0;
+        r = [];
+        for(let j = 0; j < max; j++){
+            r.push(scan(`Nota ${j+1}: `));
+        }
+
+        for(let l = 0; l < m; l++){
+            for(let k = 0; k < max; k++){
+                if(r[l] === g[k]){
+                    acertos++;
+                    break;
+                }
+            }
+        }
+        console.log(`Aluno ${i+1} - Acertos: ${acertos}`);
+        
+        if(acertos === 2){ // exercício pede 12
+            console.log("APROVADO!");
+            break;
+        }  
+        console.log("REPROVADO");
+    }
+}
+
+// EXERCÍCIO 38: VETOR 6 POSIÇÕES COM OPERAÇÕES
+function vetorOp(){
+    const max = 6;
+    v = [];
+    for(let i = 0; i < max; i++){
+        v.push(parseInt(scan(`-- Valor${i+1}: `)));
+    }
+    console.log("1 - Soma dos elementos\n2 - Produto dos elementos\n3 - Média dos elementos\n4 - Crescente\n5 - Exibir valor");
+    identificadora = parseInt(scan(": "));
+    switch(identificadora){
+        case 1:
+            soma = 0;
+            for(let i = 0; i < max; i++){
+                soma += v[i];
+            }
+            console.log(`Soma: ${soma}`);
+            break;
+        case 2:
+            produto = 1;
+            for(let i = 0; i < max; i++){
+                produto *= v[i];
+            }
+            console.log(`Produto: ${produto}`);
+            break;
+        case 3:
+            soma = 0;
+            for(let i = 0; i < max; i++){
+                soma += v[i];
+            }
+            media = soma / max;
+            console.log(`Média: ${media}`);
+            break;
+        case 4:
+            crescente = true;
+            for(let i = 0; i < max; i++){
+                if(v[i] > v[i+1]){
+                    crescente = false;
+                    break;
+                }
+            }
+            if(crescente){
+                console.log("Crescente");
+            }else{
+                console.log("Não crescente");
+            }
+            break;
+        case 5:
+            for(let i = 0; i < max; i++){
+                console.log(v[i]);
+            }
+            break;
+        default:
+            console.log("Opção inválida");
+            break;
+    }
+    limparTela();
+}
+
+// EXERCÍCIO 39: VETOR 100 POSIÇÕES
+function vetor100(){
+    const tam = 100;
+    let v = [];
+    for(let i = 0; i < tam; i++){
+        let randomNumber = Math.random() * 200 - 100; 
+        v.push(randomNumber);
+    }
+    let formattedArray = v.map(num => num.toFixed(0));
+    console.log("-- ALEATÓRIOS --");
+    console.log(`${formattedArray}`);
+
+    let filteredArray = v.filter(num => num !== null && num >= 0).map(num => num.toFixed(0));
+    console.log("\n-- FILTRADO --")
+    console.log(`${filteredArray}`);
+    limparTela();
+}
+
+// EXERCÍCIO 40: Loto
+function loto(){
+    const tam = 5;
+    let v = [];
+    console.log("Valores da Loto:");
+    for(let i = 0; i < tam; i++){        
+        v.push(parseInt(scan("Valor: ")));
+    }
+
+    let aposta;
+    for(let i = 0; i < 50; i++){
+        aposta = [];
+        console.log(`Aposta ${i+1}: `);
+        for(let j = 0; j < tam; j++){
+            aposta.push(parseInt(scan(`Informe o valor ${i + 1} da aposta:`)));
+        }
+        console.log(`Aposta ${i}: ${aposta}`);
+
+        let ganhador = true;
+        for(let k = 0; k < tam; k++) {
+            if(aposta[k]!== v[k]){
+                ganhador = false;
+                break;
+            }
+        }
+        if(ganhador){
+            console.log("GANHADOR");
+        }
+    }
+
+}
+
+// EXERCÍCIO 41: OBJETO PESSOA
+function objetoPessoa(){
+    const pessoa = {
+        nome: scan("Nome: "),
+        idade: parseInt(scan("Idade: ")),
+        email: parseInt(scan("Email: "))
+    };
+    console.log(`\nAcessando objeto Pessoa e exibindo nome: ${pessoa.nome}`);
+    limparTela();
+}
+
+// EXERCÍCIO 42: OBJETO DADOS
+function objetoDados(){
+    let dados = {
+        numero: 42,
+        texto: "Olá, mundo!",
+        Num: [1, 2, 3, 4, 5],
+        Frutas: ["maçã", "banana", "laranja"],
+        objetoInterno: {
+            booleano: true,
+            outraString: "Isso é um objeto interno!"
+        }
+    };
+
+    function filtrarArrays(objeto) {
+        let novoObjeto = {};
+        for (let chave in objeto) {
+            if (Array.isArray(objeto[chave])) {
+                novoObjeto[chave] = objeto[chave];
+            }
+        }
+        return novoObjeto;
+    }
+
+    let apenasArray = filtrarArrays(dados);
+    console.log("Apenas array:", JSON.stringify(apenasArray));
+    limparTela();
+}
 ///////////////////////////////////////////////////////////
 
 let opcao;
 function menu(){
-    console.log(`--- Menu --- \n1 - Fumante\n2 - Velocidade do carro\n3 - Preço de passagem por KM \n4 - Triângulo - Segmento de reta\n5 - Jokkenpo\n6 - Sorteio entre 1 - 5\n7 - Aluguel de carros\n8 - Vida Saudável\n9 - Salário Pago\n10 - Faça enquanto\n11 - PA - Progressão Aritmética\n12 - Fibonacci\n13 - Fibonacci Vetor\n14 - Sete Nomes\n15 - Par por posição\n16 - VETOR 20 POSIÇÕES\n17 - Nome e Idade\n18 - Registro Funcionário\n19 - Cinco Horários\n20 - Folha de Pagamentos\n21 - Peso Ideal\n22 - Pesquisa de habitantes\n23 - Matriz Identidade\n24 - Matriz: Vetor C\n25 - Matriz 15 x 20\n26 - Matriz A e B\n27 - Matriz 6x6\n28 - Matriz 10x10 com Pedido\n29 - Matriz 5x5 e operações\n30 - Matriz e 2 vetores\n31 - Matriz 30x30\n32 - Matriz 12x13\n0 - Sair\n`); 
+    console.log(`--- Menu --- \n1 - Fumante\n2 - Velocidade do carro\n3 - Preço de passagem por KM \n4 - Triângulo - Segmento de reta\n5 - Jokkenpo\n6 - Sorteio entre 1 - 5\n7 - Aluguel de carros\n8 - Vida Saudável\n9 - Salário Pago\n10 - Faça enquanto\n11 - PA - Progressão Aritmética\n12 - Fibonacci\n13 - Fibonacci Vetor\n14 - Sete Nomes\n15 - Par por posição\n16 - VETOR 20 POSIÇÕES\n17 - Nome e Idade\n18 - Registro Funcionário\n19 - Cinco Horários\n20 - Folha de Pagamentos\n21 - Peso Ideal\n22 - Pesquisa de habitantes\n23 - Matriz Identidade\n24 - Matriz: Vetor C\n25 - Matriz 15 x 20\n26 - Matriz A e B\n27 - Matriz 6x6\n28 - Matriz 10x10 com Pedido\n29 - Matriz 5x5 e operações\n30 - Matriz e 2 vetores\n31 - Matriz 30x30\n32 - Matriz 12x13\n33 - Matriz 3x3 diagonal\n34 - Matriz 50x50\n35 - Conjunto de 30 valores\n36 - Vetor de 13 elementos\n37 - Vetor G\n38 - Vetor 6 com operações\n39 - Vetor 100\n40 - Loto\n41 - Objeto Pessoa\n42 - Objeto Dados\n0 - Sair\n`); 
 }
 
 menu();
@@ -895,7 +1222,7 @@ function main(){
                 break;
             case 21:
                 var altura = 1.75;
-                var sexo = 'masculino';
+                var sexo = 'feminino';
                 pesoIdeal(altura, sexo);
                 //pesoIdeal();
                 break;
@@ -931,6 +1258,36 @@ function main(){
                 break;
             case 32: 
                 matriz12x13();
+                break;
+            case 33:
+                diagonalSecundaria();
+                break;
+            case 34:
+                trinta4();
+                break;
+            case 35:
+                trintavalores();
+                break;
+            case 36:
+                trinta6();
+                break;
+            case 37:
+                vetorG();
+                break;
+            case 38:
+                vetorOp();
+                break;
+            case 39:
+                vetor100();
+                break;
+            case 40:
+                loto();
+                break;
+            case 41:
+                objetoPessoa();
+                break;
+            case 42:
+                objetoDados();
                 break;
             case 0:
                 console.log("Saindo...");
